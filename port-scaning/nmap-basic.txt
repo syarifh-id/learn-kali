@@ -1,0 +1,114 @@
+The first task is to discover what the IP address of your Linux computer is. There is a minimum and a maximum IP address your network can use. This is the scope or range of IP addresses for your network. We will need to provide IP addresses or a range of IP addresses to nmap, so we need to know what those values are.
+
+Handily, Linux provides a command called ip and it has an option called addr (address). Type ip, a space, addr,  and press Enter.
+
+ip addr
+
+ip addr in a terminal window
+
+In the bottom section of the output, you will find your ip address. It is preceded by the label "inet".
+output from ip address in a terminal window
+
+The IP address of this computer is "192.168.4.25". The "/24" means that there are three consecutive sets of eight 1's in the subnet mask. (And 3 x 8 =24.)
+
+In binary, the subnet mask is:
+
+11111111.11111111.11111111.00000000
+
+and in decimal, it is 255.255.255.0.
+
+The subnet mask and the IP address are used to indicate which part of the IP address identifies the network, and which part identifies the device. This subnet mask informs the hardware that the first three numbers of the IP address will identify the network and the last part of the IP address identifies the individual devices. And because the largest number you can hold in an 8-bit binary number is 255, the IP address range for this network will be 192.168.4.0 through to 192.168.4.255.
+
+All of that is encapsulated in the "/24". Happily, nmap works with that notation, so we have what we need to start to use nmap.
+
+Related:
+How Do IP Addresses Work?
+Get Started with nmap
+
+nmap is a network mapping tool. It works by sending various network messages to the IP addresses in the range we're going to provide it with it. It can deduce a lot about the device it is probing by judging and interpreting the type of responses it gets.
+
+Let's kick off a simple scan with nmap. We're going to use the -sn (scan no port) option. This tells nmap to not probe the ports on the devices for now. It will do a lightweight, quick scan.
+
+Even so, it can take a little time for nmap to run. Of course, the more devices you have on the network, the longer it will take. It does all of its probing and reconnaissance work first and then presents its findings once the first phase is complete. Don't be surprised when nothing visible happens for a minute or so.
+
+The IP address we're going to use is the one we obtained using the ip command earlier, but the final number is set to zero. That is the first possible IPAddress on this network. The "/24" tells nmap to scan the entire range of this network. The parameter "192.168.4.0/24" translates as "start at IP address 192.168.4.0 and work right through all IP addresses up to and including 192.168.4.255".
+
+Note we are using sudo.
+
+sudo nmap -sn 192.168.4.0/24
+
+sudo nmap -sn 192.168.4.0/24 in a terminal window
+
+After a short wait, the output is written to the terminal window.
+
+You can run this scan without using sudo, but using sudo ensures it can extract as much information as possible. Without sudo this scan would not return the manufacturer information, for example.
+nmap output in a terminal window
+
+The advantage of using the -sn option---as well as being a quick and lightweight scan---is it gives you a neat list of the live IP addresses. In other words, we have a list of the devices connected to the network, together with their IP address. And where possible, nmap has identified the manufacturer. That's not bad for the first try.
+
+Here's the bottom of the list.
+sudo dnf install nmap in a terminal window
+
+We've established a list of the connected network devices, so we know how many of them there are. There are 15 devices switched on and connected to the network. We know the manufacturer for some of them. Or, as we shall see, we have what nmap has reported as the manufacturer, to the best of its ability.
+
+When you look through your results, you will likely see devices that you recognize. There may well be some that you don't. These are the ones we need to investigate further.
+
+What some of these devices are is clear to me. Raspberry Pi Foundation is self-explanatory. The Amazon Technologies device will be my Echo Dot. The only Samsung device I have is a laser printer, so that narrows that one down. There's a couple of devices listed as manufactured by Dell. Those are easy, that's a PC and laptop. The Avaya device is a Voice Over IP phone that provides me with an extension on the telephone system at head office. It allows them to pester me at home more easily, so I'm well aware of that device.
+
+But I'm still left with questions.
+
+There are several devices with names that don't mean anything to me all. Liteon technology and Elitegroup Computer systems, for example.
+
+I have (way) more than one Raspberry PI. How many are connected to the network will always vary because they're continually swapped in and out of duty as they get re-imaged and re-purposed. But definitely, there should be more than one showing up.
+
+There are a couple of devices marked as Unknown. Obviously, they'll need looking into.
+Perform a Deeper Scan
+
+If we remove the -sn option nmap will also try to probe the ports on the devices. Ports are numbered endpoints for network connections on devices. Consider an apartment block. All the apartments have the same street address (the equivalent of the IP address), but each apartment has its own number (the equivalent of the port).
+
+Each program or service within a device has a port number. Network traffic is delivered to an IP address and a port, not just to an IP address. Some port numbers are preallocated, or reserved. They are always used to carry network traffic of a specific type. Port 22, for example, is reserved for SSH connections and port 80 is reserved for HTTP web traffic.
+
+We are going to use nmap to scan the ports on each device and tells which ones are open.
+
+nmap 192.168.4.0/24
+nmap 192.168.4.0/24 in a terminal window
+
+This time we're getting a more detailed summary of each device. We're told there are 13 active devices on the network. Wait a minute; we had 15 devices a moment ago.
+
+The number of devices may well vary as you run these scans. It is likely due to mobile devices arriving and leaving the premises, or equipment being turned on and off. Also, be aware that when you switch on a device that has been powered off, it might not have the same IP address as it did the last time it was in use. it might, but it might not.
+nmap output in a terminal window
+
+There was a lot of output. Let's do that again and capture it in a file.
+
+nmap 192.168.4.0/24 > nmap-list.txt
+
+nmap 192.168.4.0/24 > nmap-list.txt in a terminal window
+
+And now we can list the file with less, and search through it if we wish.
+
+less nmap-list.txt
+
+less nmap-list.txt in a terminal window
+
+As you scroll through the nmap report you're looking for anything that you can't explain or that seems unusual. When you review your list, make a note of the IP addresses of any devices that you wish to investigate further.
+
+According to the list that we generated earlier, 192.168.4.10 is a Raspberry Pi. It will be running one Linux distribution or another. So what is using port 445? It is described as "microsoft-ds". Microsoft, on a Pi running Linux? We'll certainly be looking into that.
+
+192.168.4.11 was tagged as "Unknown" in the earlier scan. It has a lot of ports open; we need to know what that is.
+nmap output in a terminal window
+
+192.168.4.18 was also identified as a Raspberry Pi. But that Pi and device 192.168.4.21 both have port 8888 open, which is described as being used by "sun-answerbook". Sun AnswerBook is a many-years retired (elementary) documentation retrieval system. Needless to say, I don't have that installed anywhere. That needs looking at.
+nmap output in a terminal window
+
+Device 192.168.4.22 was identified earlier as a Samsung printer, which is verified here by the tag that says "printer". What caught my eye was the HTTP port 80 being present and open. This port is reserved for website traffic. Does my printer incorporate a website?
+nmap results for a samsung printer in a terminal window
+
+Device 192.168.4.31 is reportedly manufactured by a company called Elitegroup Computer Systems. I've never heard of them, and the device has a lot of ports open, so we'll be looking into that.
+
+The more ports a device has open, the more chances a cybercriminal has of getting into it---if it is exposed directly to the Internet that is. It's like a house. The more doors and windows you have, the more potential points of entry a burglar has.
+nmap output for an Intel NUC in a terminal window
+We've Lined Up The Suspects; Let's Make Them Talk
+
+Device 192.168.4.10 is a Raspberry Pi that has port 445 open, which is described as "microsoft-ds." A quick bit of Internet searching reveals that port 445 is usually associated with Samba. Samba is a free software implementation of Microsoft's Server Message Block protocol (SMB). SMB is a means of sharing folders and files across a network.
+
+This makes sense; I use that particular Pi as a sort of mini-Network Attached Storage device (NAS). It uses Samba so that I can connect to it from any computer on my network. Ok, that was easy. One down, several more to go.
