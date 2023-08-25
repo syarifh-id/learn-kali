@@ -1,0 +1,69 @@
+1. run sniffing on specific interface
+
+# tcpdump -i eth0
+
+2. Capture Only N Number of Packets
+
+When you run the tcpdump command it will capture all the packets for the specified interface, until you hit the cancel button. But using -c option, you can capture a specified number of packets. The below example will only capture 6 packets.
+
+# tcpdump -c 5 -i eth0
+
+3. Print Captured Packets in ASCII
+
+The below tcpdump command with the option -A displays the package in ASCII format. It is a character-encoding scheme format.
+
+# tcpdump -A -i eth0
+
+4. Display Available Interfaces
+
+To list the number of available interfaces on the system, run the following command with -D option.
+
+# tcpdump -D
+
+5. Display Captured Packets in HEX and ASCII
+
+The following command with option -XX capture the data of each packet, including its link level header in HEX and ASCII format.
+
+# tcpdump -XX -i eth0
+
+6. Capture and Save Packets in a File
+
+As we said, that tcpdump has a feature to capture and save the file in a .pcap format, to do this just execute the command with -w option.
+
+# tcpdump -w 0001.pcap -i eth0
+
+7. Read Captured Packets File
+
+To read and analyze captured packet 0001.pcap file use the command with -r option, as shown below.
+
+# tcpdump -r 0001.pcap
+
+8. Capture IP Address Packets
+
+To capture packets for a specific interface, run the following command with option -n.
+
+# tcpdump -n -i eth0
+
+9. Capture only TCP Packets.
+
+To capture packets based on TCP port, run the following command with option tcp.
+
+# tcpdump -i eth0 tcp
+
+10. Capture Packet from Specific Port
+
+Let’s say you want to capture packets for specific port 22, execute the below command by specifying port number 22 as shown below.
+
+# tcpdump -i eth0 port 22
+
+10. Capture Packet from Specific Port
+
+Let’s say you want to capture packets for specific port 22, execute the below command by specifying port number 22 as shown below.
+
+# tcpdump -i eth0 port 22
+
+12. Capture Packets from destination IP
+
+To capture packets from the destination IP, say you want to capture packets for 50.116.66.139, use the command as follows.
+
+# tcpdump -i eth0 dst 50.116.66.139
