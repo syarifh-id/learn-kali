@@ -1,0 +1,151 @@
+
+Halo Teman teman kali ini kita akan mencoba mengeksploitasi sebuah sistem yang memiliki kerentanan atau vulnerbility.
+
+sistem yang akan kita coba exploit ini menjalankan apache tomcat. aplikasi ini sendiri memiliki referensi CVE-2020–1938 yang dikenal dengan Ghostcat,
+
+Oke langsung kita mulai
+
+sebelumnya agar memudahkan kita akan menyimpan ip kedalam variable
+
+IP=
+
+langkah pertama kita akan melakukan port scanning menggunakan Nmap untuk melihat port yang terbuka pada sistem tersebut 
+kita dapat melakukan scanning dengan perintah 
+
+nmap -sC -sV -oN version-scan 10.10.29.114
+
+-sC: Ini meminta Nmap untuk menjalankan beberapa skrip otomatis yang bisa memberikan informasi tambahan tentang target.
+
+-sV: Ini meminta Nmap untuk mencoba mengidentifikasi versi perangkat lunak yang berjalan di target.
+
+-oN version-scan: Ini mengarahkan Nmap untuk menyimpan hasil pemindaian ke dalam file bernama "version-scan".
+
+dari hasil scanning kita dapat memperoleh beberapa informasi
+
+sistem ini menjalankan 
+ssh pada port 22
+server Apache Java pada 8009 
+Apache Tomcat 9.0.30 berjalan pada 8080
+
+bila kita menavigasikan menuju toncat server dengan mengetikkan alamat ip server ini dan port 8080 maka kita akan mendapati landing page dari tomcat server
+
+pada referensi CVE-2020-1938 kita dapat mengeksploitasi vulnerbility dari tomcat server. sehingga kita dapat membaca konten file konfigurasi dan file kode sumber dari semua aplikasi web yang diterapkan di Tomcat.
+
+Untuk mengeksploitasi kerentanan Ghostcat kita dapat mengunduh POC dari github
+
+kita dapat menggunakannya dengan melakukan
+
+sudo git clone https://github.com/00theway/Ghostcat-CNVD-2020-10487.git
+
+
+kita dapat menggunakanbantuan ajp shotter untuk mengeksploitasi.
+
+kita akan mencoba melihat dan membaca isi file konfigurasi pada direktori 
+/WEB-INF/web.xml.
+
+
+kita dapat menggunakan command
+
+python ajpShooter.py http://10.10.188.67 8009 /WEB-INF/web.xml read
+
+hasilnya kita dapat membaca isi file dari web.xml yang memuat beberapa konfigurasi dan kredensial 
+
+SSH Port 22: Pengguna skyfuck:sandinya
+
+kita akan mencoba melakukan ssh menggukana username dan password yang telah kita dapatakan
+
+
+ssh username@ip
+
+
+yay kita telah berhasil masuk kedalam sistem ini menggunakan username ini
+
+kita dapat memasstikannya dengan command
+
+whoami
+
+kita dapat mengeksplorasi direktori home dari user isi
+
+ls 
+ls -a
+ll
+
+
+kita dapat  melihat beberapa file yang merupakan tantang dari room tryhackme ini.
+
+credential.pgp dan tryhackme.asc 
+
+kita dapat mencopy file tryhackme.asc untuk keperluan tantangan ini
+
+commanduntuk mengcopy 
+
+scp username@remote_host:path/to/remote/file /path/to/save/local/file
+
+kita akan mencoba brute-force file ini menggunakan john-the-reapper
+
+kita konversikan file ini terlebih dahulu menggunakan command
+
+gpg2john tryhackme.asc > hash
+
+lalu kita gunakan wordlist rockyou.txt untuk melakukan brute force.
+
+john --wordlist=/usr/share/wordlists/rockyou.txt hash
+
+kita lihat  hasil dari brute-force menggunakan
+
+john --show hash
+
+yang kita lakukan selanjutnya adalah 
+mengimport kunci tryhackme.asc dan melakukan dekrpsi file credential.pgp
+
+pgp --impor tryhackme.asc
+gpg --dekripsi credential.pgp
+kita masukkan bisa masukkan passphrase dari hasi brute-force yang kita lakukan tadi
+
+dan kita dapat melihat isi dari credential.pgp
+
+isinya adalah username dan password untuk login di superuser sistem ini
+langsung kita coba
+
+su username
+
+lalu kita masukkan password-nya
+
+maka kita telah masuk menggunakan user merlin
+
+kita cek 
+whoami
+
+
+sekarang kita tingkatkan hak aksesyang kita memiliki atau istilahnya privesc (previleges escalation)
+
+kita lihat previleges yang kita punya
+
+sudo -l -l
+
+kita lihat kita bisa menjalankan binary zip sebagai root.
+
+kita cek melalui situs 
+https://gtfobins.github.io/gtfobins/zip/
+dan cari exploit-nya
+
+
+kita coba eksploit
+
+dan kita berhasil masuk menjadi root dapat ditandai dengan tanda #
+
+kita coba buktikan
+
+whoami
+
+dan kita coba navigasikan ke direktori root 
+
+cd /root
+ls -al
+
+dan kita akhirnya mendapatkan file yang kita cari
+
+
+cat root.txt
+
+
