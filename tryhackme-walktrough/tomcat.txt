@@ -56,7 +56,7 @@ hasilnya kita dapat membaca isi file dari web.xml yang memuat beberapa konfigura
 
 SSH Port 22: Pengguna skyfuck:sandinya
 
-kita akan mencoba melakukan ssh menggukana username dan password yang telah kita dapatakan
+kita akan mencoba melakukan ssh menggukana username dan password yang telah kita dapatkan
 
 
 ssh username@ip
