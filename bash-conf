@@ -25,3 +25,7 @@ alias gb='git checkout -b'
 # View the difference.
 
 alias gd='git diff
+
+function find_largest_files() {
+du -h -x -s -- \* | sort -r -h | head -20;
+}
