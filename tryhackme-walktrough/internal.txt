@@ -1,0 +1,3 @@
+scanning posr pada server menggunakan nmap
+
+nmap -sV ip_target
