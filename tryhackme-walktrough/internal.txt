@@ -2,10 +2,11 @@ scanning posr pada server menggunakan nmap
 
 nmap -sV ip_target
 
-enumerate 
+enumerate HTTP port
 
-┌──(kali㉿kali)-[~]
-└─$ gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://internal.thm
-===============================================================
-Gobuster v3.6
-by OJ Reeves (@TheColonial) & Christian Mehlmauer (@firefart)
+gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://internal.thm
+
+
+Enumerate WordPress using wpscan, and we find the username ‘admin.’
+
+wpscan --url http://internal.thm/blog -e u
