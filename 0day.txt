@@ -1,0 +1,8 @@
+Zero-day meaning and definition
+"Zero-day" is a broad term that describes recently discovered security vulnerabilities that hackers can use to attack systems. The term "zero-day" refers to the fact that the vendor or developer has only just learned of the flaw – which means they have “zero days” to fix it. A zero-day attack takes place when hackers exploit the flaw before developers have a chance to address it.
+
+Zero-day is sometimes written as 0-day. The words vulnerability, exploit, and attack are typically used alongside zero-day, and it’s helpful to understand the difference:
+
+A zero-day vulnerability is a software vulnerability discovered by attackers before the vendor has become aware of it. Because the vendors are unaware, no patch exists for zero-day vulnerabilities, making attacks likely to succeed.
+A zero-day exploitis the method hackers use to attack systems with a previously unidentified vulnerability.
+A zero-day attack is the use of a zero-day exploit to cause damage to or steal data from a system affected by a vulnerability.
