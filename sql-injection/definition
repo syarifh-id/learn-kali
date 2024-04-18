@@ -1,0 +1,14 @@
+from gemini
+
+SQL injection (SQLi) adalah teknik hacking yang digunakan untuk menyerang kelemahan keamanan pada database suatu aplikasi. Ini dilakukan dengan menyisipkan kode berbahaya ke dalam input formulir atau parameter pada website tersebut. 
+
+Secara umum, aplikasi web yang rentan terhadap SQL injection disebabkan oleh pemfilteran input yang tidak tepat. Saat pengguna memasukkan data, aplikasi tersebut seharusnya memvalidasi dan memfilter data tersebut untuk mencegah kode berbahaya dieksekusi. Namun, jika filterisasi tidak dilakukan dengan benar, penyerang dapat menyisipkan kode SQL jahat ke dalam inputnya. 
+
+Kode SQL yang disisipkan tersebut bisa bermacam-macam, tergantung pada tujuan penyerang. Beberapa contoh serangan SQL injection meliputi:
+
+* **Mencuri data:** Penyerang bisa mengambil data sensitif yang tersimpan di database, seperti username, password, nomor kartu kredit, atau informasi pribadi lainnya.
+* **Mengubah data:** Penyerang bisa mengubah data yang ada di database, misalnya untuk mengubah hasil voting atau merusak informasi penting.
+* **Menghapus data:** Penyerang bisa menghapus data yang ada di database.
+* **Mengambilalih kendali database:** Dalam kasus yang parah, penyerang bisa mengambil alih kendali penuh atas database.
+
+Untuk mencegah serangan SQL injection, developer web harus memvalidasi dan memfilter semua input pengguna dengan ketat. Mereka juga bisa menggunakan teknik lain seperti prepared statements untuk mencegah kode berbahaya dieksekusi di dalam database.
