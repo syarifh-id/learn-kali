@@ -1,0 +1,10 @@
+Installation Steps
+Download the script:
+
+wget https://raw.githubusercontent.com/IamCarron/DVWA-Script/main/Install-DVWA.sh
+Make the script executable:
+
+chmod +x Install-DVWA.sh
+Run the script as root:
+
+sudo ./Install-DVWA.sh
