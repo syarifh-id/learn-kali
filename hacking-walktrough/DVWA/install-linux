@@ -1,10 +1,19 @@
 Installation Steps
 Download the script:
-
-wget https://raw.githubusercontent.com/IamCarron/DVWA-Script/main/Install-DVWA.sh
+wget https://raw.githubusercontent.com/IamCarron/DVWA-Script/main/Install-DVWA.h
 Make the script executable:
-
 chmod +x Install-DVWA.sh
-Run the script as root:
-
+Run the script as root:w
 sudo ./Install-DVWA.sh
+
+
+install on docker 
+
+
+Clone or download this repository and extract (see Download).
+
+Open a terminal of your choice and change its working directory into this folder (DVWA).
+
+Run docker compose up -d.
+
+DVWA is now available at http://localhost:4280.
