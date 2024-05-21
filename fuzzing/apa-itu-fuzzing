@@ -1,0 +1,72 @@
+Dalam konteks pentesting (pengujian penetrasi), **fuzzing** adalah teknik pengujian otomatis yang melibatkan pemberian input yang tidak valid, tidak diharapkan, atau acak ke dalam program atau aplikasi untuk menemukan kerentanan atau bug. Tujuan utama fuzzing adalah untuk mengidentifikasi potensi kerentanan keamanan yang dapat dieksploitasi oleh penyerang, seperti buffer overflow, crashes, memory leaks, atau error handling yang tidak tepat.
+
+### Cara Kerja Fuzzing:
+
+1. **Generasi Input**:
+
+   - Fuzzer menghasilkan berbagai jenis input yang tidak terduga atau acak, yang kemudian dikirimkan ke aplikasi yang diuji. Input ini bisa berupa string acak, data binari, atau variasi dari input normal yang diubah untuk mencakup karakter khusus atau panjang yang tidak biasa.
+
+2. **Pengujian Aplikasi**:
+
+   - Input yang dihasilkan dikirim ke target aplikasi atau program. Fuzzer kemudian memantau bagaimana aplikasi merespons input tersebut.
+
+3. **Pemantauan Respons**:
+
+   - Fuzzer mengamati dan mencatat respons aplikasi terhadap input. Ini termasuk mendeteksi crash, kesalahan, perilaku yang tidak biasa, atau ketidakkonsistenan lainnya.
+
+4. **Analisis Hasil**:
+   - Setelah pengujian, hasilnya dianalisis untuk mengidentifikasi kerentanan yang ditemukan. Ini bisa mencakup analisis log, core dumps, atau output aplikasi lainnya yang menunjukkan adanya masalah.
+
+### Jenis-Jenis Fuzzing:
+
+1. **Black-Box Fuzzing**:
+
+   - Dalam black-box fuzzing, fuzzer tidak memiliki pengetahuan tentang struktur internal atau kode sumber dari aplikasi yang diuji. Input dihasilkan dan dikirim tanpa penyesuaian khusus berdasarkan pengetahuan tentang aplikasi.
+
+2. **White-Box Fuzzing**:
+
+   - White-box fuzzing menggunakan pengetahuan tentang kode sumber dan struktur internal aplikasi untuk menghasilkan input yang lebih spesifik dan terarah. Teknik ini sering kali melibatkan analisis kode dan pengetahuan tentang jalur eksekusi yang berbeda dalam aplikasi.
+
+3. **Gray-Box Fuzzing**:
+   - Gray-box fuzzing berada di antara black-box dan white-box fuzzing. Fuzzer memiliki sebagian pengetahuan tentang struktur internal aplikasi, seperti beberapa informasi tentang format input atau jalur eksekusi, yang membantu dalam mengarahkan pengujian.
+
+### Manfaat Fuzzing dalam Pentesting:
+
+1. **Deteksi Kerentanan Otomatis**:
+
+   - Fuzzing memungkinkan pendeteksian kerentanan secara otomatis tanpa memerlukan intervensi manusia yang ekstensif, membuatnya efisien dalam menemukan bug dan masalah keamanan.
+
+2. **Skalabilitas**:
+
+   - Teknik fuzzing dapat diterapkan pada berbagai jenis aplikasi dan protokol, termasuk aplikasi web, perangkat lunak desktop, layanan jaringan, dan perangkat keras.
+
+3. **Pengujian Ekstensif**:
+
+   - Fuzzer dapat menghasilkan dan menguji banyak input dalam waktu singkat, mencakup berbagai kemungkinan skenario yang mungkin tidak terpikirkan oleh penguji manusia.
+
+4. **Identifikasi Kesalahan Tidak Terduga**:
+   - Dengan memberikan input yang tidak diharapkan, fuzzing dapat mengidentifikasi kesalahan dan masalah yang mungkin terlewatkan dalam pengujian manual atau pengujian yang lebih terstruktur.
+
+### Contoh Penggunaan Fuzzing:
+
+- **Aplikasi Web**:
+  Menguji form input, URL parameters, dan API endpoints dengan data acak atau tidak terduga untuk menemukan SQL injection, XSS (cross-site scripting), dan kerentanan lainnya.
+
+- **Protokol Jaringan**:
+  Mengirim data acak atau terubah ke protokol jaringan untuk menemukan buffer overflow atau kerentanan lainnya dalam implementasi protokol.
+
+- **Perangkat Lunak Desktop**:
+  Membuka file yang diubah atau acak dalam perangkat lunak untuk menemukan crash atau bug terkait pemrosesan file.
+
+### Alat Fuzzing Populer:
+
+- **AFL (American Fuzzy Lop)**:
+  Digunakan untuk fuzzing aplikasi dengan input yang berbasis file. AFL adalah fuzzer yang sangat efisien yang menggunakan analisis coverage untuk menghasilkan input yang efektif.
+
+- **libFuzzer**:
+  Library untuk fuzzing yang terintegrasi dengan LLVM, digunakan untuk melakukan fuzzing fungsi di dalam aplikasi secara langsung.
+
+- **Burp Suite Intruder**:
+  Termasuk dalam suite Burp Suite, memungkinkan fuzzing input untuk aplikasi web untuk menemukan kerentanan seperti SQL injection dan XSS.
+
+Fuzzing adalah teknik esensial dalam pentesting karena kemampuannya untuk mengungkap kerentanan yang mungkin sulit ditemukan dengan metode pengujian lainnya, memberikan lapisan tambahan dalam proses pengujian keamanan.
