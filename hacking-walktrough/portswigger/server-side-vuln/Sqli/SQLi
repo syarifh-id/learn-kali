@@ -5,7 +5,7 @@ SQL injection (SQLi) is a web security vulnerability that allows an attacker to 
 **terjemah**
 
 Sqli adalah kerentanan pada keamanan web yang menyebabkan penyerang dapat mempengaruhi atau mengganggu query yang dibuat oleh aplikasi web. dengan serangan ini penyerang dapat melihat yang seharusnya tidak bisa dilihat atau diambil. termasuk data milik user lain, atau data lain yang dapat diakses oleh aplikasi
-dalam banyak kasus penyerang dapat memodifikasi atau menghapus data, dan dapat menyebabkan perubahan pada konten dan perilaku alikasi
+dalam banyak kasus penyerang dapat memodifikasi atau menghapus data, dan dapat menyebabkan perubahan pada konten dan perilaku aplikasi
 
 In some situations, an attacker can escalate a SQL injection attack to compromise the underlying server or other back-end infrastructure. It can also enable them to perform denial-of-service attacks.
 
@@ -39,6 +39,7 @@ kebanyakan kerentanan sqli terjadi pada klausa 'WHERE' dari Query 'SELECT'. keba
 
 bagaimanapun kerentanan SQLi dapat terjadi pada di queri manapun, lokasi yang sering tejadi antara lain
 
+In UPDATE statements, within the updated values or the WHERE clause.
 In UPDATE statements, within the updated values or the WHERE clause.
 In INSERT statements, within the inserted values.
 In SELECT statements, within the table or column name.
