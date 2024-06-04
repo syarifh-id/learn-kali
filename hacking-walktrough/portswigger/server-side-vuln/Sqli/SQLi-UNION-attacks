@@ -4,7 +4,7 @@ When an application is vulnerable to SQL injection, and the results of the query
 
 **Terjemahan**
 
-ketika sebuah aplikasi rentan terhadap serangan sql injection dan hasil dari query dikembalikan melalui respon dari aplikasi, maka kita dapat menggunakan keyword UNION untuk mengambil data dari tabel lain dalam database. serangan ini dikenal dengan SQli Union attack
+## ketika sebuah aplikasi rentan terhadap serangan sql injection dan hasil dari query dikembalikan melalui respon dari aplikasi, maka kita dapat menggunakan keyword UNION untuk mengambil data dari tabel lain dalam database. serangan ini dikenal dengan SQli Union attack
 
 The UNION keyword enables you to execute one or more additional SELECT queries and append the results to the original query. For example:
 
@@ -18,7 +18,7 @@ Keyword UNION memungkinkan kita untuk mengeksekusi satu atau lebih queri SELECT 
 
 SELECT a, b FROM table1 UNION SELECT c, d FROM table2
 
-queri sql ini akan mengembalikan satu hasil dengan 2 kolom, yang berisi value dari colom a dan b dari tabel1 dan colom c dan d dari tabel2
+## queri sql ini akan mengembalikan satu hasil dengan 2 kolom, yang berisi value dari colom a dan b dari tabel1 dan colom c dan d dari tabel2
 
 For a UNION query to work, two key requirements must be met:
 
@@ -41,6 +41,8 @@ untuk menjalankan serangan sql injection, pastikan memenuhi 2 persyaratan tadi. 
 - berapa kolom yang dikembalikan oleh queri yang asli
 - kolom mana yang dikembalikan dari wueri asli yang sesuai dengan queri yang akan menampung hasil dari injeksi queri
 
+---
+
 ## Determining the number of columns required
 
 When you perform a SQL injection UNION attack, there are two effective methods to determine how many columns are being returned from the original query.
@@ -53,12 +55,24 @@ One method involves injecting a series of ORDER BY clauses and incrementing the 
 etc.
 
 This series of payloads modifies the original query to order the results by different columns in the result set. The column in an ORDER BY clause can be specified by its index, so you don't need to know the names of any columns. When the specified column index exceeds the number of actual columns in the result set, the database returns an error, such as:
+The ORDER BY position number 3 is out of range of the number of items in the select list.
 
 **Terjemah**
 
 ketika kita melakukan serangan SQli UNION ada dua cara yang efektif untuk menetukan jumlah kolom yang dikembalikan oleh queri yang asli.
 
-The ORDER BY position number 3 is out of range of the number of items in the select list.
+salah satu metode untuk yang digunakan adalah menggunakan klausa ORDER BY dengan memasukkan satu persatu index kolom sampai muncul pesan error. jika titik injeksi adalah string dalam tanda petik di dalam klausa WHERE pada query asli kita bisa menggunakan :
+' ORDER BY 1--
+' ORDER BY 2--
+' ORDER BY 3--
+etc.
+
+kumpulan payload ini menyebabkan queri asli untuk mengurutkan berdasarkan kolom yang bebeda di set hasil.
+kolom pada kalusa ORDER BY dapat ditentukan dengan index dari kolom tersebut. jadi kita tidak perlu tahu nama kolom.
+ketika indek yang dimasukkan melebihi jumlah kolom yang asli pada set hasil, maka database mengembalikan pesan error. :
+
+---
+
 The application might actually return the database error in its HTTP response, but it may also issue a generic error response. In other cases, it may simply return no results at all. Either way, as long as you can detect some difference in the response, you can infer how many columns are being returned from the query.
 
 The second method involves submitting a series of UNION SELECT payloads specifying a different number of null values:
