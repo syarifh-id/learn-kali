@@ -1,4 +1,4 @@
-##What is SQL injection (SQLi)?##
+## What is SQL injection (SQLi)?
 
 SQL injection (SQLi) is a web security vulnerability that allows an attacker to interfere with the queries that an application makes to its database. This can allow an attacker to view data that they are not normally able to retrieve. This might include data that belongs to other users, or any other data that the application can access. In many cases, an attacker can modify or delete this data, causing persistent changes to the application's content or behavior.
 
@@ -7,6 +7,8 @@ SQL injection (SQLi) is a web security vulnerability that allows an attacker to 
 Sqli adalah kerentanan pada keamanan web yang menyebabkan penyerang dapat mempengaruhi atau mengganggu query yang dibuat oleh aplikasi web. dengan serangan ini penyerang dapat melihat yang seharusnya tidak bisa dilihat atau diambil. termasuk data milik user lain, atau data lain yang dapat diakses oleh aplikasi
 dalam banyak kasus penyerang dapat memodifikasi atau menghapus data, dan dapat menyebabkan perubahan pada konten dan perilaku aplikasi
 
+---
+
 In some situations, an attacker can escalate a SQL injection attack to compromise the underlying server or other back-end infrastructure. It can also enable them to perform denial-of-service attacks.
 
 **terjemah**
@@ -14,7 +16,9 @@ In some situations, an attacker can escalate a SQL injection attack to compromis
 pada situasi yang lain, penyerang dapat meningkatkan serangan SQLi
 untuk menyerang server atau infrasruktur backend yang lain. dapat pula untuk melakukan serangan DDoS
 
-##How to detect SQL injection vulnerabilities##
+---
+
+## How to detect SQL injection vulnerabilities
 
 You can detect SQL injection manually using a systematic set of tests against every entry point in the application. To do this, you would typically submit:
 
@@ -27,7 +31,9 @@ You can detect SQL injection manually using a systematic set of tests against ev
 - Payloads designed to trigger time delays when executed within a SQL query, and look for differences in the time taken to respond.
 - OAST payloads designed to trigger an out-of-band network interaction when executed within a SQL query, and monitor any resulting interactions.
 
-#SQL injection in different parts of the query#
+---
+
+## SQL injection in different parts of the query
 
 Most SQL injection vulnerabilities occur within the WHERE clause of a SELECT query. Most experienced testers are familiar with this type of SQL injection.
 
