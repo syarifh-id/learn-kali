@@ -4,7 +4,7 @@ When an application is vulnerable to SQL injection, and the results of the query
 
 **Terjemahan**
 
-## ketika sebuah aplikasi rentan terhadap serangan sql injection dan hasil dari query dikembalikan melalui respon dari aplikasi, maka kita dapat menggunakan keyword UNION untuk mengambil data dari tabel lain dalam database. serangan ini dikenal dengan SQli Union attack
+ketika sebuah aplikasi rentan terhadap serangan sql injection dan hasil dari query dikembalikan melalui respon dari aplikasi, maka kita dapat menggunakan keyword UNION untuk mengambil data dari tabel lain dalam database. serangan ini dikenal dengan SQli Union attack
 
 The UNION keyword enables you to execute one or more additional SELECT queries and append the results to the original query. For example:
 
@@ -18,7 +18,7 @@ Keyword UNION memungkinkan kita untuk mengeksekusi satu atau lebih queri SELECT 
 
 SELECT a, b FROM table1 UNION SELECT c, d FROM table2
 
-## queri sql ini akan mengembalikan satu hasil dengan 2 kolom, yang berisi value dari colom a dan b dari tabel1 dan colom c dan d dari tabel2
+queri sql ini akan mengembalikan satu hasil dengan 2 kolom, yang berisi value dari colom a dan b dari tabel1 dan colom c dan d dari tabel2
 
 For a UNION query to work, two key requirements must be met:
 
