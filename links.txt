@@ -1,0 +1,5 @@
+Respons manipulation
+
+https://medium.com/@tanyago/account-takeover-through-response-manipulation-db66c2f8830
+https://compsecurityconcepts.wordpress.com/2013/11/02/authentication-bypass/
+https://ms-official5878.medium.com/authentication-bypass-via-response-manipulation-ee4b5b7ea9d6
